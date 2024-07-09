@@ -1,9 +1,9 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from "../components/common/Navbar"
-import Movie from "../pages/Movies/Movies"
+import Movie from "../pages/moviesfile/Movies"
 import LoginSignup from "../components/LoginSignUp"
 import FavoritesPage from "../pages/Favorties/FavoritesPage"
-import MovieDetail from "../pages/Movies/MovieDetail"
+import MovieDetail from "../pages/moviesfile/MovieDetail"
 
 const AllRoutes = () => {
   return (

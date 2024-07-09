@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { setSearchTerm, clearSuggestions, setSuggestions } from '../../redux/searchAuth/searchSlice';
+import { setSearchTerm, clearSuggestions } from '../../redux/searchAuth/searchSlice';
 import { fetchMovieSuggestions } from '../services/movieService'
 import { useNavigate } from 'react-router-dom';
 import { UseSearchBarResult } from '../interface/types';

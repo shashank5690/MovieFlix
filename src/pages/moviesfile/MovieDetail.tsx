@@ -20,7 +20,6 @@ import { RootState } from '../../store';
 import localforage from 'localforage';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import Rating from '@mui/material/Rating';
 
 
 

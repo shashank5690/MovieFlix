@@ -123,9 +123,20 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             </Typography>
             </CardContent>
             <CardActions>
-            <Button onClick={toggleFavorite}>
-                {isFavorite ? <FavoriteIcon sx={{ color: 'red' }} /> : <FavoriteBorderIcon sx={{ color: 'red' }} />}
-            </Button>
+            <Button
+                onClick={toggleFavorite}
+                sx={{
+                    color: 'red',
+                    fontWeight: 'bold',
+                    textTransform: 'none',
+                    '&:hover': {
+                    color: 'black',
+                    },
+                }}
+                >
+                {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+                </Button>
+
             </CardActions>
          </Card>
         </Grid>
