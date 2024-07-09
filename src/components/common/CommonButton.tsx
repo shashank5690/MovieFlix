@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from "@mui/material/Button";
 import Loader from './Loader';
-import Box from '@mui/material/Box';
 
 interface CustomButtonProps {
     type?: "button" | "submit" | "reset" | undefined;
