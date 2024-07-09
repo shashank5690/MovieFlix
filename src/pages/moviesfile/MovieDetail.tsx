@@ -1,4 +1,3 @@
-// MovieDetail.tsx
 import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -18,13 +17,8 @@ import { addToFavorites, removeFromFavorites, addComment } from '../../redux/uer
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import localforage from 'localforage';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-
-
-
-interface MovieDetailProps { }
+interface MovieDetailProps {}
 
 const MovieDetail: React.FC<MovieDetailProps> = () => {
     const { imdbID } = useParams<{ imdbID: string }>();
@@ -32,7 +26,6 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector((state: RootState) => state.auth.currentUser) as UserData | null | undefined;
     const [newComment, setNewComment] = useState('');
-    
     const [comments, setComments] = useState<{ user: string; comment: string }[]>([]);
 
     useEffect(() => {
@@ -86,7 +79,7 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
     const handleAddComment = async () => {
         if (newComment.trim() !== '') {
             const comment = { user: currentUser?.name ?? 'Anonymous', comment: newComment };
-            dispatch(addComment(comment)); 
+            dispatch(addComment(comment));
             const updatedComments = [...comments, comment];
             setComments(updatedComments);
             await localforage.setItem(`comments_${imdbID}`, updatedComments);
@@ -96,172 +89,172 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
 
     return (
         <>
-        <Card
-            sx={{
-            maxWidth: '100%',
-            margin: 'auto',
-            marginTop: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            backgroundColor: 'white',
-            borderRadius: '10px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            }}
-        >
-            <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-                <CardMedia
-                component="img"
-                height= '500'
-                image={movie.Poster}
-                alt={movie.Title}
+            <Card
                 sx={{
-                    width: '570px',
-                    height:'650px',
-                    objectFit: 'cover',
+                    maxWidth: '100%',
+                    margin: 'auto',
+                    marginTop: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    backgroundColor: 'white',
                     borderRadius: '10px',
-                    marginLeft:'90px',
-                    transition: 'transform 0.2s',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                 }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-10px)';
-                    }}
-                    onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    }}
-                />
-            </Grid>
-            <Grid item xs={12} md={6}>
-                <CardContent sx={{ fontFamily: 'Inter' }}>
-                <Typography
-                    variant="h4"
-                    gutterBottom
-                    sx={{ fontWeight: 'bold', fontFamily: 'Inter', fontSize: '32px' }}
-                >
-                    {movie.Title}
-                </Typography>
-                <Typography
-                    variant="body1"
-                    gutterBottom
-                    sx={{ fontFamily: 'Inter' }}
-                >
-                    {movie.Plot}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    gutterBottom
-                    sx={{ fontFamily: 'Inter' }}
-                >
-                    <span style={{ fontWeight: 'bold' }}>Rating:</span> {movie.imdbRating}/10
-                </Typography>
-                <Typography
-                    variant="body2"
-                    gutterBottom
-                    sx={{ fontFamily: 'Inter' }}
-                >
-                    <span style={{ fontWeight: 'bold' }}>Released:</span> {movie.Released}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    gutterBottom
-                    sx={{ fontFamily: 'Inter' }}
-                >
-                    <span style={{ fontWeight: 'bold' }}>Director:</span> {movie.Director}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    gutterBottom
-                    sx={{ fontFamily: 'Inter' }}
-                >
-                    <span style={{ fontWeight: 'bold' }}>Writer:</span> {movie.Writer}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    gutterBottom
-                    sx={{ fontFamily: 'Inter' }}
-                >
-                    <span style={{ fontWeight: 'bold' }}>Actors:</span> {movie.Actors}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    gutterBottom
-                    sx={{ fontFamily: 'Inter' }}
-                >
-                    <span style={{ fontWeight: 'bold' }}>Language:</span> {movie.Language}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    gutterBottom
-                    sx={{ fontFamily: 'Inter' }}
-                >
-                    <span style={{ fontWeight: 'bold' }}>Genre:</span> {movie.Genre}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    gutterBottom
-                    sx={{ fontFamily: 'Inter' }}
-                >
-                    <span style={{ fontWeight: 'bold' }}>Country:</span> {movie.Country}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    gutterBottom
-                    sx={{ fontFamily: 'Inter' }}
-                >
-                    <span style={{ fontWeight: 'bold' }}>Awards:</span> {movie.Awards}
-                </Typography>
-                <Button onClick={toggleFavorite} sx={{ color: 'red' , marginBottom:'22px' }}>
-                    {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                </Button>
-                <TextareaAutosize
-                    aria-label="Add comment.."
-                    placeholder="Add comment.."
-                    value={newComment}
-                    onChange={handleCommentChange}
-                    style={{
-                    marginTop: '16px',
-                    width: '75%',
-                    padding: '8px',
-                    border: '1px solid red',
-                    borderRadius: '4px',
-                    resize: 'vertical',
-                    }}
-                />
-                <Button
-                    onClick={handleAddComment}
-                    sx={{
-                    marginTop: '8px',
-                    color: 'red',
-                    fontWeight: 'bold',
-                    '&:hover': {
-                        color: 'black',
-                    },
-                    }}
-                >
-                    Add Comment
-                </Button>
-                <Typography variant="h6" sx={{ marginTop: '24px', fontWeight: 'bold' }}>
-                    Comments:
-                </Typography>
-                <List>
-                    {comments.map((comment, index) => (
-                    <ListItem
-                        key={index}
-                        sx={{ borderBottom: '1px solid #ddd', paddingTop: '8px', paddingBottom: '8px' }}
-                    >
-                        <ListItemText
-                        primaryTypographyProps={{ variant: 'body2', fontWeight: 'bold' }}
-                        primary={`${comment.user}: ${comment.comment}`}
+            >
+                <Grid container spacing={3}>
+                    <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <CardMedia
+                            component="img"
+                            image={movie.Poster}
+                            alt={movie.Title}
+                            sx={{
+                                width: { xs: '100%', sm: '80%', md: '570px' },
+                                height: { xs: 'auto', sm: 'auto', md: '720px' },
+                                objectFit: 'cover',
+                                borderRadius: '10px',
+                                transition: 'transform 0.2s',
+                                '&:hover': {
+                                    transform: 'translateY(-10px)',
+                                },
+                            }}
                         />
-                    </ListItem>
-                    ))}
-                </List>
-                </CardContent>
-            </Grid>
-            </Grid>
-        </Card>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <CardContent sx={{ fontFamily: 'Inter' }}>
+                            <Typography
+                                variant="h4"
+                                gutterBottom
+                                sx={{ fontWeight: 'bold', fontFamily: 'Inter', fontSize: '32px' }}
+                            >
+                                {movie.Title}
+                            </Typography>
+                            <Typography
+                                variant="body1"
+                                gutterBottom
+                                sx={{ fontFamily: 'Inter' }}
+                            >
+                                {movie.Plot}
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                gutterBottom
+                                sx={{ fontFamily: 'Inter' }}
+                            >
+                                <span style={{ fontWeight: 'bold' }}>Rating:</span> {movie.imdbRating}/10
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                gutterBottom
+                                sx={{ fontFamily: 'Inter' }}
+                            >
+                                <span style={{ fontWeight: 'bold' }}>Released:</span> {movie.Released}
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                gutterBottom
+                                sx={{ fontFamily: 'Inter' }}
+                            >
+                                <span style={{ fontWeight: 'bold' }}>Director:</span> {movie.Director}
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                gutterBottom
+                                sx={{ fontFamily: 'Inter' }}
+                            >
+                                <span style={{ fontWeight: 'bold' }}>Writer:</span> {movie.Writer}
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                gutterBottom
+                                sx={{ fontFamily: 'Inter' }}
+                            >
+                                <span style={{ fontWeight: 'bold' }}>Actors:</span> {movie.Actors}
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                gutterBottom
+                                sx={{ fontFamily: 'Inter' }}
+                            >
+                                <span style={{ fontWeight: 'bold' }}>Language:</span> {movie.Language}
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                gutterBottom
+                                sx={{ fontFamily: 'Inter' }}
+                            >
+                                <span style={{ fontWeight: 'bold' }}>Genre:</span> {movie.Genre}
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                gutterBottom
+                                sx={{ fontFamily: 'Inter' }}
+                            >
+                                <span style={{ fontWeight: 'bold' }}>Country:</span> {movie.Country}
+                            </Typography>
+                            <Typography
+                                variant="body2"
+                                gutterBottom
+                                sx={{ fontFamily: 'Inter' }}
+                            >
+                                <span style={{ fontWeight: 'bold' }}>Awards:</span> {movie.Awards}
+                            </Typography>
+                            <Button
+                                onClick={toggleFavorite}
+                                sx={{ color: 'red', marginBottom: '22px' }}
+                                disabled={!currentUser}
+                            >
+                                {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+                            </Button>
+                            <TextareaAutosize
+                                aria-label="Add comment.."
+                                placeholder="Add comment.."
+                                value={newComment}
+                                onChange={handleCommentChange}
+                                style={{
+                                    marginTop: '16px',
+                                    width: '75%',
+                                    padding: '8px',
+                                    border: '1px solid red',
+                                    borderRadius: '4px',
+                                    resize: 'vertical',
+                                }}
+                                disabled={!currentUser}
+                            />
+                            <Button
+                                onClick={handleAddComment}
+                                sx={{
+                                    marginTop: '8px',
+                                    color: 'red',
+                                    fontWeight: 'bold',
+                                    '&:hover': {
+                                        color: 'black',
+                                    },
+                                }}
+                                disabled={!currentUser}
+                            >
+                                Add Comment
+                            </Button>
+                            <Typography variant="h6" sx={{ marginTop: '24px', fontWeight: 'bold' }}>
+                                Comments:
+                            </Typography>
+                            <List>
+                                {comments.map((comment, index) => (
+                                    <ListItem
+                                        key={index}
+                                        sx={{ borderBottom: '1px solid #ddd', paddingTop: '8px', paddingBottom: '8px' }}
+                                    >
+                                        <ListItemText
+                                            primaryTypographyProps={{ variant: 'body2', fontWeight: 'bold' }}
+                                            primary={`${comment.user}: ${comment.comment}`}
+                                        />
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </CardContent>
+                    </Grid>
+                </Grid>
+            </Card>
         </>
-
     );
 };
 
