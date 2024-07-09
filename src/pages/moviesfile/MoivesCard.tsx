@@ -11,8 +11,7 @@ import { Movie } from '../../utils/interface/types';
 import { RootState } from '../../store';
 import { useNavigate } from 'react-router-dom';
 import { removeFromFavorites, addToFavorites } from '../../redux/uersAuth/authSlice';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 import Typography from '@mui/material/Typography';
 
 
