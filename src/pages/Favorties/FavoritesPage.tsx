@@ -12,7 +12,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Movie } from '../../utils/interface/types';
 import { removeFromFavorites } from '../../redux/uersAuth/authSlice';
 import './FavoritesPage.css';
-import MovieTypography from '../../components/common/CommonTypography';
 
 const FavoritesPage: React.FC = () => {
     const dispatch = useDispatch();
