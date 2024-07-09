@@ -16,21 +16,13 @@ const useSearchBar = (): UseSearchBarResult => {
     const [openSuggestions, setOpenSuggestions] = useState(false);
     const suggestionListRef = useRef<HTMLUListElement>(null);
 
-    const fetchSuggestions = async (inputSearchTerm: string) => {
-        try {
-            const fetchedSuggestions = await fetchMovieSuggestions(inputSearchTerm);
-            dispatch(setSuggestions(fetchedSuggestions));
-            setOpenSuggestions(true);
-        } catch (error) {
-            console.error('Error fetching suggestions:', error);
-        }
-    };
+ 
 
     const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value;
         dispatch(setSearchTerm(inputValue));
         if (inputValue.trim() !== '') {
-            fetchSuggestions(inputValue);
+            fetchMovieSuggestions(inputValue);
         } else {
             dispatch(clearSuggestions());
             setOpenSuggestions(false);
