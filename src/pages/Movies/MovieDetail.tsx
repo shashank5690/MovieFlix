@@ -20,6 +20,8 @@ import { RootState } from '../../store';
 import localforage from 'localforage';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Rating from '@mui/material/Rating';
+
 
 
 
@@ -31,6 +33,7 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector((state: RootState) => state.auth.currentUser) as UserData | null | undefined;
     const [newComment, setNewComment] = useState('');
+    
     const [comments, setComments] = useState<{ user: string; comment: string }[]>([]);
 
     useEffect(() => {
