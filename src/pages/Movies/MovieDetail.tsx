@@ -21,19 +21,25 @@ import Rating from '@mui/material/Rating';
 
 interface MovieDetailProps {}
 
+interface Comment {
+    user: string;
+    comment: string;
+    rating: number | null;
+}
+
 const MovieDetail: React.FC<MovieDetailProps> = () => {
     const { imdbID } = useParams<{ imdbID: string }>();
     const { data, loading, error } = useApiData();
     const dispatch = useDispatch();
     const currentUser = useSelector((state: RootState) => state.auth.currentUser) as UserData | null | undefined;
     const [newComment, setNewComment] = useState('');
-    const [comments, setComments] = useState<{ user: string; comment: string }[]>([]);
+    const [comments, setComments] = useState<Comment[]>([]);
     const [userRating, setUserRating] = useState<number | null>(null);
 
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const storedComments = await localforage.getItem<{ user: string; comment: string }[]>(`comments_${imdbID}`);
+                const storedComments = await localforage.getItem<Comment[]>(`comments_${imdbID}`);
                 if (storedComments) {
                     setComments(storedComments);
                 }
@@ -79,13 +85,18 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
     };
 
     const handleAddComment = async () => {
-        if (newComment.trim() !== '') {
-            const comment = { user: currentUser?.name ?? 'Anonymous', comment: newComment };
+        if (newComment.trim() !== '' && userRating !== null) {
+            const comment: Comment = {
+                user: currentUser?.name ?? 'Anonymous',
+                comment: newComment,
+                rating: userRating,
+            };
             dispatch(addComment(comment));
             const updatedComments = [...comments, comment];
             setComments(updatedComments);
             await localforage.setItem(`comments_${imdbID}`, updatedComments);
             setNewComment('');
+            setUserRating(null);
         }
     };
 
@@ -254,11 +265,28 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
                                 {comments.map((comment, index) => (
                                     <ListItem
                                         key={index}
-                                        sx={{ borderBottom: '1px solid #ddd', paddingTop: '8px', paddingBottom: '8px' }}
+                                        sx={{
+                                            border: '1px solid #ddd',
+                                            borderRadius: '4px',
+                                            marginBottom: '8px',
+                                        }}
                                     >
                                         <ListItemText
-                                            primaryTypographyProps={{ variant: 'body2', fontWeight: 'bold' }}
-                                            primary={`${comment.user}: ${comment.comment}`}
+                                            primary={comment.user}
+                                            secondary={
+                                                <>
+                                                    <Typography component="span" variant="body2" color="textPrimary">
+                                                        {comment.comment}
+                                                    </Typography>
+                                                    <br />
+                                                    <Rating value={comment.rating} readOnly />
+                                                </>
+                                            }
+                                            sx={{
+                                                '& .MuiListItemText-primary': {
+                                                    fontWeight: 'bold',
+                                                },
+                                            }}
                                         />
                                     </ListItem>
                                 ))}
