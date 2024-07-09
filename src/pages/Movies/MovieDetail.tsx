@@ -17,7 +17,7 @@ import { addToFavorites, removeFromFavorites, addComment } from '../../redux/uer
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import localforage from 'localforage';
-import Rating from '@mui/material/Rating';
+
 
 interface MovieDetailProps {}
 
