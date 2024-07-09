@@ -19,7 +19,7 @@ export interface UserData {
     email: string;
     password: string;
     favorites: Movie[];
-    comments: { user: string; comment: string; }[];
+    comments: { user: string; comment: string }[];
 }
 
 export interface FormErrors {

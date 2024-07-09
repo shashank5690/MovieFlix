@@ -17,6 +17,7 @@ import { addToFavorites, removeFromFavorites, addComment } from '../../redux/uer
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import localforage from 'localforage';
+import Rating from '@mui/material/Rating';
 
 interface MovieDetailProps {}
 
@@ -27,6 +28,7 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
     const currentUser = useSelector((state: RootState) => state.auth.currentUser) as UserData | null | undefined;
     const [newComment, setNewComment] = useState('');
     const [comments, setComments] = useState<{ user: string; comment: string }[]>([]);
+    const [userRating, setUserRating] = useState<number | null>(null);
 
     useEffect(() => {
         const fetchComments = async () => {
@@ -85,6 +87,10 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
             await localforage.setItem(`comments_${imdbID}`, updatedComments);
             setNewComment('');
         }
+    };
+
+    const handleRatingChange = (event: React.ChangeEvent<{}>, newValue: number | null) => {
+        setUserRating(newValue);
     };
 
     return (
@@ -205,6 +211,13 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
                             >
                                 {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
                             </Button>
+                            <Rating
+                                name="user-rating"
+                                value={userRating}
+                                onChange={handleRatingChange}
+                                sx={{ marginBottom: '16px' }}
+                                disabled={!currentUser}
+                            />
                             <TextareaAutosize
                                 aria-label="Add comment.."
                                 placeholder="Add comment.."
