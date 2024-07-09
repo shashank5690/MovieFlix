@@ -11,12 +11,14 @@ import { useNavigate } from 'react-router-dom';
 import { Props } from '../utils/interface/types';
 import Login from '../pages/User/Login';
 import Register from '../pages/User/Register';
+import AppBar from '@mui/material/AppBar';
 
 const LoginSignup: React.FC<Props> = ({ formType }) => {
     const navigate = useNavigate();
 
     return (
         <>
+
             <Container maxWidth="xs" sx={{ display: 'flex', flexDirection: 'column', 
                 justifyContent: 'center', alignItems: 'center', marginTop: 10  }}>
                 <Card sx={{ width: '100%', overflow: 'hidden' }}>

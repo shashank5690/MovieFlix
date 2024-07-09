@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { SignUpschema } from '../../utils/schema/loginSignupSchema';
-import { UserData } from '../../utils/interface/types';
+import { SignUpschema } from '../schema/loginSignupSchema';
+import { UserData } from '../interface/types';
 
 interface UseRegisterFormProps {
     onSubmit: (data: UserData) => void;

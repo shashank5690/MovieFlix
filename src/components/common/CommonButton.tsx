@@ -30,8 +30,9 @@ const CommonButton: React.FC<CustomButtonProps> = ({ type = "button", disabled =
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: '0 auto',  // Center the button
-    borderRadius:'50px'
+    marginTop: '10px',  // Center the button
+    borderRadius:'50px',
+    marginLeft:'30px',
   }}
 >
   {children}
