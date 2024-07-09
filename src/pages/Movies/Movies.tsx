@@ -1,6 +1,6 @@
 import React from 'react';
 import useApiData from '../../utils/customHooks/Apidata';
-import MovieCard from './MoivesCard';
+import MovieCard from './MoivesCard';debugger
 import { Container, Grid } from '@mui/material';
 import Loader from '../../components/common/Loader';
 import { Movie } from '../../utils/interface/types';
@@ -8,6 +8,7 @@ import ErrorBoundary from '../../utils/errorboundary/ErrorBoundary';
 
 const Movies: React.FC = () => {
     const { data, loading, error } = useApiData();
+
 
     if (loading) return <Loader />;
     if (error) return <p>Error: {error}</p>;
