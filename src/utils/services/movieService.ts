@@ -12,6 +12,7 @@ export const fetchMovieSuggestions = async (searchTerm: string, p0: Movie[]) => 
         return filteredMovies;
     } catch (error) {
         console.error('Error fetching movie suggestions:', error);
+        console.log(p0)
         throw error; 
     }
 };
