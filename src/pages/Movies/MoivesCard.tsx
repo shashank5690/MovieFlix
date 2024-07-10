@@ -51,11 +51,11 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
                     marginTop: 16,
                     backgroundColor: 'white',
                     transition: 'transform 0.2s',
-                    borderRadius: 10,
+                    borderRadius: 6,
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                 }}
                 onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-10px)';
+                    e.currentTarget.style.transform = 'translateY(-4px)';
                 }}
                 onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0)';
@@ -69,14 +69,14 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
                     onClick={navigateToMovieDetails}
                     style={{
                         cursor: 'pointer',
-                        borderRadius: '10px 10px 0 0',
+                        borderRadius: '6px 6px 0 0',
                     }}
                 />
                 <CardContent>
                     <Typography
                         variant="h5"
                         gutterBottom
-                        sx={{ fontWeight: 'bold', fontFamily: 'Inter', fontSize: '25px' }}
+                        sx={{ fontWeight: 'bold', fontFamily: 'League Spartan', fontSize: '25px' }}
                     >
                         {movie.Title}
                     </Typography>
@@ -88,34 +88,35 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
                     <Button
                         size="small"
                         onClick={toggleExpand}
-                        sx={{ fontWeight: 'bold', color: 'red', fontFamily: 'Inter', fontSize: '15px' }}
+                        sx={{ fontWeight: 'bold', color: '#9d0208', fontFamily: 'League Spartan', fontSize: '12px', marginTop:'-8px', marginLeft:'-5px' }}
                     >
                         {isExpanded ? 'See Less' : 'See More'}
                     </Button>
                     <Typography
                         variant="body2"
-                        sx={{ fontSize: '1rem', fontFamily: 'Inter' }}
+                        sx={{ fontSize: '1rem', fontFamily: 'League Spartan' }}
                     >
                         <span style={{ fontWeight: 'bold' }}>Director:</span> {movie.Director}
                     </Typography>
                     <Typography
                         variant="body2"
-                        sx={{ fontSize: '1rem', fontFamily: 'Inter' }}
+                        sx={{ fontSize: '1rem', fontFamily: 'League Spartan' }}
                     >
                         <span style={{ fontWeight: 'bold' }}>Rating:</span> {movie.imdbRating}/10
                     </Typography>
                     <Typography
                         variant="body2"
-                        sx={{ fontSize: '1rem', fontFamily: 'Inter' }}
+                        sx={{ fontSize: '1rem', fontFamily: 'League Spartan' }}
                     >
                         <span style={{ fontWeight: 'bold' }}>Released:</span> {movie.Released}
                     </Typography>
                     <Typography
                         variant="body2"
-                        sx={{ fontSize: '1rem', fontFamily: 'Inter' }}
+                        sx={{ fontSize: '1rem', fontFamily: 'League Spartan' }}
                     >
-                        <span style={{ fontWeight: 'bold' }}>Genre:</span> {movie.Genre}
+                        <span style={{ fontWeight: 'bold' }}>Genre:</span> {movie.Genre.substring(0, 18)}
                     </Typography>
+
                 </CardContent>
                 <CardActions>
                     <Button

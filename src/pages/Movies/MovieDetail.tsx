@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import localforage from 'localforage';
 import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
 
 interface MovieDetailProps {}
 
@@ -119,105 +120,108 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
                 }}
             >
                 <Grid container spacing={3}>
-                    <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <CardMedia
-                            component="img"
-                            image={movie.Poster}
-                            alt={movie.Title}
-                            sx={{
-                                width: { xs: '100%', sm: '80%', md: '570px' },
-                                height: { xs: 'auto', sm: 'auto', md: '720px' },
-                                objectFit: 'cover',
-                                borderRadius: '10px',
-                                transition: 'transform 0.2s',
-                                '&:hover': {
-                                    transform: 'translateY(-10px)',
-                                },
-                            }}
-                        />
+                    <Grid item xs={12} md={6} >
+                    <CardMedia
+                        component="img"
+                        image={movie.Poster}
+                        alt={movie.Title}
+                        sx={{
+                            width: { xs: '100%', sm: '80%', md: '400px' },  // Make the image a bit smaller on desktop
+                            height: { xs: 'auto', sm: 'auto', md: '600px' },  // Make the image a bit smaller on desktop
+                            objectFit: 'cover',
+                            borderRadius:'6px',
+                            transition: 'transform 0.2s',
+                            '&:hover': {
+                                transform: 'translateY(-4px)',
+                            },
+                            // Move the image up on desktop
+                            mt: { xs: 0, sm: 0, md: 0 },  // Negative margin to move it up
+                            mx: { xs: 0, sm: 0, md: 'auto' },  // Center the image horizontally on desktop
+                        }}
+                    />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <CardContent sx={{ fontFamily: 'Inter' }}>
+                        <CardContent sx={{ fontFamily: 'League Spartan' }}>
                             <Typography
                                 variant="h4"
                                 gutterBottom
-                                sx={{ fontWeight: 'bold', fontFamily: 'Inter', fontSize: '32px' }}
+                                sx={{ fontWeight: 'bold', fontFamily: 'League Spartan', fontSize: '32px' }}
                             >
                                 {movie.Title}
                             </Typography>
                             <Typography
                                 variant="body1"
                                 gutterBottom
-                                sx={{ fontFamily: 'Inter' }}
+                                sx={{ fontFamily: 'League Spartan' }}
                             >
                                 {movie.Plot}
                             </Typography>
                             <Typography
                                 variant="body2"
                                 gutterBottom
-                                sx={{ fontFamily: 'Inter' }}
+                                sx={{ fontFamily: 'League Spartan' }}
                             >
                                 <span style={{ fontWeight: 'bold' }}>Rating:</span> {movie.imdbRating}/10
                             </Typography>
                             <Typography
                                 variant="body2"
                                 gutterBottom
-                                sx={{ fontFamily: 'Inter' }}
+                                sx={{ fontFamily: 'League Spartan' }}
                             >
                                 <span style={{ fontWeight: 'bold' }}>Released:</span> {movie.Released}
                             </Typography>
                             <Typography
                                 variant="body2"
                                 gutterBottom
-                                sx={{ fontFamily: 'Inter' }}
+                                sx={{ fontFamily: 'League Spartan' }}
                             >
                                 <span style={{ fontWeight: 'bold' }}>Director:</span> {movie.Director}
                             </Typography>
                             <Typography
                                 variant="body2"
                                 gutterBottom
-                                sx={{ fontFamily: 'Inter' }}
+                                sx={{ fontFamily: 'League Spartan' }}
                             >
                                 <span style={{ fontWeight: 'bold' }}>Writer:</span> {movie.Writer}
                             </Typography>
                             <Typography
                                 variant="body2"
                                 gutterBottom
-                                sx={{ fontFamily: 'Inter' }}
+                                sx={{ fontFamily: 'League Spartan' }}
                             >
                                 <span style={{ fontWeight: 'bold' }}>Actors:</span> {movie.Actors}
                             </Typography>
                             <Typography
                                 variant="body2"
                                 gutterBottom
-                                sx={{ fontFamily: 'Inter' }}
+                                sx={{ fontFamily: 'League Spartan' }}
                             >
                                 <span style={{ fontWeight: 'bold' }}>Language:</span> {movie.Language}
                             </Typography>
                             <Typography
                                 variant="body2"
                                 gutterBottom
-                                sx={{ fontFamily: 'Inter' }}
+                                sx={{ fontFamily: 'League Spartan' }}
                             >
                                 <span style={{ fontWeight: 'bold' }}>Genre:</span> {movie.Genre}
                             </Typography>
                             <Typography
                                 variant="body2"
                                 gutterBottom
-                                sx={{ fontFamily: 'Inter' }}
+                                sx={{ fontFamily: 'League Spartan' }}
                             >
                                 <span style={{ fontWeight: 'bold' }}>Country:</span> {movie.Country}
                             </Typography>
                             <Typography
                                 variant="body2"
                                 gutterBottom
-                                sx={{ fontFamily: 'Inter' }}
+                                sx={{ fontFamily: 'League Spartan' }}
                             >
                                 <span style={{ fontWeight: 'bold' }}>Awards:</span> {movie.Awards}
                             </Typography>
                             <Button
                                 onClick={toggleFavorite}
-                                sx={{ color: 'red', marginBottom: '22px' }}
+                                sx={{ color: 'red', marginBottom: '10px' }}
                                 disabled={!currentUser}
                             >
                                 {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
@@ -226,7 +230,9 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
                                 name="user-rating"
                                 value={userRating}
                                 onChange={handleRatingChange}
-                                sx={{ marginBottom: '16px' }}
+                                sx={{ marginBottom: '16px',
+                                    marginLeft:'10px',
+                                 }}
                                 disabled={!currentUser}
                             />
                             <TextareaAutosize
@@ -239,7 +245,7 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
                                     width: '75%',
                                     padding: '8px',
                                     border: '1px solid red',
-                                    borderRadius: '4px',
+                                    borderRadius: '40px',
                                     resize: 'vertical',
                                 }}
                                 disabled={!currentUser}
@@ -247,12 +253,13 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
                             <Button
                                 onClick={handleAddComment}
                                 sx={{
-                                    marginTop: '8px',
+                                    
                                     color: 'red',
                                     fontWeight: 'bold',
                                     '&:hover': {
                                         color: 'black',
                                     },
+                                    
                                 }}
                                 disabled={!currentUser}
                             >
@@ -267,27 +274,27 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
                                         key={index}
                                         sx={{
                                             border: '1px solid #ddd',
-                                            borderRadius: '4px',
+                                            borderRadius: '12px',
                                             marginBottom: '8px',
+                                            
                                         }}
                                     >
-                                        <ListItemText
-                                            primary={comment.user}
-                                            secondary={
-                                                <>
-                                                    <Typography component="span" variant="body2" color="textPrimary">
-                                                        {comment.comment}
-                                                    </Typography>
-                                                    <br />
-                                                    <Rating value={comment.rating} readOnly />
-                                                </>
-                                            }
-                                            sx={{
-                                                '& .MuiListItemText-primary': {
-                                                    fontWeight: 'bold',
-                                                },
-                                            }}
-                                        />
+                                       <ListItemText
+                                        primary={comment.user}
+                                        secondary={
+                                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop:'-2px'}}>
+                                                <Typography component="span" variant="body2" color="textPrimary">
+                                                    {comment.comment}
+                                                </Typography>
+                                                <Rating value={comment.rating} readOnly />
+                                            </Box>
+                                        }
+                                        sx={{
+                                            '& .MuiListItemText-primary': {
+                                                fontWeight: 'bold',
+                                            },
+                                        }}
+                                    />
                                     </ListItem>
                                 ))}
                             </List>
