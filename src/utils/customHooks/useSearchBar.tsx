@@ -1,28 +1,37 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { setSearchTerm, clearSuggestions } from '../../redux/searchAuth/searchSlice';
-import { fetchMovieSuggestions } from '../services/movieService'
+import { setSearchTerm, clearSuggestions, setSuggestions } from '../../redux/searchAuth/searchSlice';
+import { fetchMovieSuggestions } from '../services/movieService';
 import { useNavigate } from 'react-router-dom';
-import { UseSearchBarResult } from '../interface/types';
-
+import { Movie, UseSearchBarResult } from '../interface/types';
+import useApiData from './Apidata';
 
 const useSearchBar = (): UseSearchBarResult => {
     const navigate = useNavigate();
+    const {data} = useApiData();
     const dispatch = useDispatch();
     const searchTerm = useSelector((state: RootState) => state.search.searchTerm);
     const suggestions = useSelector((state: RootState) => state.search.suggestions);
     const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(null);
     const [openSuggestions, setOpenSuggestions] = useState(false);
     const suggestionListRef = useRef<HTMLUListElement>(null);
-
- 
+    
+    const fetchSuggestions = async (inputSearchTerm: string) => {
+        try {
+            const fetchedSuggestions = await fetchMovieSuggestions(inputSearchTerm, data as Movie[]);
+            dispatch(setSuggestions(fetchedSuggestions!));
+            setOpenSuggestions(true);
+        } catch (error) {
+            console.error('Error fetching suggestions:', error);
+        }
+    };
 
     const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value;
         dispatch(setSearchTerm(inputValue));
         if (inputValue.trim() !== '') {
-            fetchMovieSuggestions(inputValue);
+            fetchSuggestions(inputValue);
         } else {
             dispatch(clearSuggestions());
             setOpenSuggestions(false);
@@ -69,7 +78,7 @@ const useSearchBar = (): UseSearchBarResult => {
     }, []);
 
     useEffect(() => {
-       
+        
     }, [searchTerm, suggestions, openSuggestions]);
 
     return {

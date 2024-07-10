@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Movie } from '../interface/types'; 
+import { Movie } from '../../utils/interface/types'; 
 
 const useApiData = () => {
     const [dataFromApi, setDataFromApi] = useState<Movie[] | null>(null);
