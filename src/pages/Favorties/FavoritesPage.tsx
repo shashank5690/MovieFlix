@@ -23,13 +23,13 @@ const FavoritesPage: React.FC = () => {
 
     return (
         <div className="favorites-container" style={{ padding: '16px' }}>
-  <Typography variant="h4" className="page-title" gutterBottom sx={{ fontWeight: 'bold', fontFamily: 'Roboto' }}>
-    Your Favorites
-  </Typography>
-  {currentUser?.favorites.length === 0 ? (
-    <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'Roboto' }}>
-      No favorite movies added yet.
-    </Typography>
+          <Typography variant="h4" className="page-title" gutterBottom sx={{ fontWeight: 'bold', fontFamily: 'Roboto' }}>
+            Your Favorites
+          </Typography>
+          {currentUser?.favorites.length === 0 ? (
+            <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'Roboto' }}>
+              No favorite movies added yet.
+            </Typography>
   ) : (
     <Grid container spacing={3}>
       {currentUser?.favorites.map((favorite) => (

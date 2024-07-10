@@ -87,7 +87,7 @@ const MovieDetail: React.FC<MovieDetailProps> = () => {
     const handleAddComment = async () => {
         if (newComment.trim() !== '' && userRating !== null) {
             const comment: Comment = {
-                user: currentUser?.name ?? 'Anonymous',
+                user: currentUser?.name ?? 'MR. X',
                 comment: newComment,
                 rating: userRating,
             };
