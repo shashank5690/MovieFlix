@@ -46,18 +46,22 @@ const Register = () => {
 
     return (
         <>
-            <AppBar
+             <AppBar
                 position="static"
                 sx={{
-                background: 'linear-gradient(to right, black, red, black)',
-                color: 'white',
+                background: 'white',
+                color: '#03071e',
                 borderRadius: '10px',
-                mb: 4,  // Adds margin at the bottom to separate the AppBar from the form
+                mb: 4,
+                boxShadow:'0'  // Adds margin at the bottom to separate the AppBar from the form
                 }}
             >
                 <Toolbar>
-                <Typography variant="h5" sx={{ flexGrow: 1, textAlign: 'center' }}>
-                    Movie Explorer
+                <Typography variant="h5" sx={{ flexGrow: 1, 
+                    textAlign: 'center' , 
+                    fontFamily:"Playwrite DK Uloopet", 
+                    fontWeight:'bold'}}>
+                    Let's Register You! 🚀
                 </Typography>
                 </Toolbar>
             </AppBar>
@@ -97,21 +101,21 @@ const Register = () => {
                         textAlign: 'center',
                         color: '#555',
                     }}
-        >
-          Don’t have an account?{' '}
-          <Typography
-            component="span"
-            sx={{
-              color: 'red',
-              fontWeight: 'bold',
-              textDecoration: 'none',
-              cursor: 'pointer',
-              '&:hover': {
-                textDecoration: 'underline',
-              },
-            }}
-            onClick={() => navigate('/login')} // Navigate to the Sign Up page on click
-          >
+                        >
+                        Don’t have an account? 🤝{' '}
+                        <Typography
+                            component="span"
+                            sx={{
+                            color: '#d00000',
+                            fontWeight: 'bold',
+                            textDecoration: 'none',
+                            cursor: 'pointer',
+                            '&:hover': {
+                                textDecoration: 'underline',
+                            },
+                            }}
+                            onClick={() => navigate('/login')} // Navigate to the Sign Up page on click
+                        >
             Login now!
           </Typography>
         </Typography>

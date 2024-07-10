@@ -19,10 +19,11 @@ const CommonButton: React.FC<CustomButtonProps> = ({ type = "button", disabled =
           size="large"
           onClick={onClick}
           sx={{
-            mt:'6px',
-            backgroundColor: 'black',
+            mt:'18px',
+            mb:'12px',
+            backgroundColor: '#03071e',
             color: 'white',
-            '&:hover': { backgroundColor: '#E50914' },
+            '&:hover': { backgroundColor: '#d00000' },
             height: 50,  // Adjusted height for a smaller button
             fontSize: '1rem',
             fontWeight:'bold',  // Adjusted font size for a smaller button
@@ -32,7 +33,7 @@ const CommonButton: React.FC<CustomButtonProps> = ({ type = "button", disabled =
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: '50px',
-            border: '2px solid black',  // Added 2px black border
+            // border: '2px break black',  // Added 2px black border
             mx: 'auto',  // Center the button horizontally
           }}
         >
