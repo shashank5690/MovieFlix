@@ -20,127 +20,64 @@ const SearchBar = () => {
     } = useSearchBar();
 
     return (
-        <>
-            {/* Desktop and Tablet SearchBar */}
-            <Box
+        <Box
+            sx={{
+                width: '100%',
+                maxWidth: { xs: '100%', md: 420 }, // Adjust maxWidth for desktop
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                position: 'relative',
+            }}
+        >
+            <Paper
+                component="form"
                 sx={{
-                    display: { xs: 'none', md: 'flex' },
                     width: '100%',
-                    maxWidth: 420,
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
-                    position: 'relative',
-                }}
-            >
-                <Paper
-                    component="form"
-                    sx={{
-                        width: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        border: "solid brown 1px",
-                        borderRadius: '50px'
-                    }}
-                >
-                    <InputBase
-                        placeholder="Search your Favorite movies..."
-                        value={searchTerm}
-                        onChange={handleSearchInputChange}
-                        onKeyDown={handleKeyDown}
-                        fullWidth
-                        sx={{ flexGrow: 1, marginLeft: 2 }}
-                    />
-                    <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
-                        
-                    </IconButton>
-                </Paper>
-                {openSuggestions && suggestions?.length > 0 && (
-                    <List
-                        ref={suggestionListRef}
-                        sx={{
-                            position: 'absolute',
-                            zIndex: 1,
-                            width: '100%',
-                            marginTop: 2,
-                            backgroundColor: 'white',
-
-                        }}
-                    >
-                        {suggestions.map((movie, index) => (
-                            <ListItem
-                                button
-                                key={movie.imdbID}
-                                selected={index === selectedItemIndex}
-                                onClick={() => handleSuggestionClick(movie.imdbID)}
-                            >
-                                <ListItemText 
-                                    primary={movie.Title}
-                                    sx={{ color: 'black' }} // Change font color to black
-                                />
-                            </ListItem>
-                        ))}
-                    </List>
-                )}
-            </Box>
-
-             {/* Mobile SearchBar */}
-             <Box
-                sx={{
-                    display: { xs: 'flex', md: 'none' },
+                    display: 'flex',
                     alignItems: 'center',
-                    width: '100%',
-                    marginLeft: 'auto',
-                    marginRight: 'auto',
+                    border: "solid brown 1px",
+                    borderRadius: '50px'
                 }}
             >
-                <IconButton
-                    size="large"
-                    color="inherit"
-                    aria-label="search"
-                    sx={{ mr: 1 }}
-                >
-                    
-                </IconButton>
                 <InputBase
-                    placeholder="Search..."
+                    placeholder="Search your Favorite yo movies..."
                     value={searchTerm}
                     onChange={handleSearchInputChange}
                     onKeyDown={handleKeyDown}
                     fullWidth
-                    sx={{
-                        backgroundColor: 'white',
-                        borderRadius: 1,
-                        padding: '0 10px',
-                    }}
+                    sx={{ flexGrow: 1, marginLeft: 2 }}
                 />
-                {openSuggestions && suggestions?.length > 0 && (
-                    <List
-                        ref={suggestionListRef}
-                        sx={{
-                            position: 'absolute',
-                            zIndex: 1,
-                            width: '100%',
-                            marginTop: 2,
-                            backgroundColor: 'white',
-                        }}
-                    >
-                        {suggestions.map((movie, index) => (
-                            <ListItem
-                                button
-                                key={movie.imdbID}
-                                selected={index === selectedItemIndex}
-                                onClick={() => handleSuggestionClick(movie.imdbID)}
-                            >
-                                <ListItemText 
-                                    primary={movie.Title}
-                                    sx={{ color: 'black' }} // Change font color to black
-                                />
-                            </ListItem>
-                        ))}
-                    </List>
-                )}
-            </Box>
-        </>
+                <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+                    {/* Add search icon if needed */}
+                </IconButton>
+            </Paper>
+            {openSuggestions && suggestions?.length > 0 && (
+                <List
+                    ref={suggestionListRef}
+                    sx={{
+                        position: 'absolute',
+                        zIndex: 1,
+                        width: '100%',
+                        marginTop: 2,
+                        backgroundColor: 'white',
+                    }}
+                >
+                    {suggestions.map((movie, index) => (
+                        <ListItem
+                            button
+                            key={movie.imdbID}
+                            selected={index === selectedItemIndex}
+                            onClick={() => handleSuggestionClick(movie.imdbID)}
+                        >
+                            <ListItemText 
+                                primary={movie.Title}
+                                sx={{ color: 'black' }} // Change font color to black
+                            />
+                        </ListItem>
+                    ))}
+                </List>
+            )}
+        </Box>
     );
 };
 
